@@ -1,0 +1,31 @@
+# hasselbol.se production stack, started on server-1 by hand:
+#
+#   cd ~/hasselbol/site
+#   docker compose -f deploy/server/docker-compose.yml up -d --build --wait
+#
+# Cloudflare Tunnel maps hasselbol.se and www.hasselbol.se to this container's
+# host port (127.0.0.1:8082), configured in /etc/cloudflared/config.yml on the
+# server - nothing here touches DNS.
+#
+# Fixed project name so container/network names are stable regardless of the
+# directory compose happens to be run from.
+name: hasselbol
+
+services:
+  web:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    # Bound to loopback only: the container is reachable exclusively through
+    # the Cloudflare Tunnel, never directly from the LAN or the internet.
+    # 8082 is free on server-1 (8080/8081/8090/8091 are friluftsliv's).
+    ports:
+      - '127.0.0.1:8082:80'
+    # nginx:alpine has no curl, but busybox wget is present.
+    healthcheck:
+      test: ['CMD-SHELL', 'wget --no-verbose --tries=1 --spider http://localhost/ || exit 1']
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s

@@ -1,0 +1,14 @@
+{
+  "name": "hasselbol.se",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page for hasselbol.se",
+  "scripts": {
+    "dev": "browser-sync start --server --port \"${PORT:-4321}\" --files \"index.html, styles.css, assets/**\" --no-notify --no-open",
+    "start": "serve . -l \"${PORT:-4321}\" -n"
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.4",
+    "serve": "^14.2.5"
+  }
+}

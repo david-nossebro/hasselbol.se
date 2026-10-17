@@ -1,0 +1,72 @@
+:root {
+  --bg: #1c1a17;
+  --fg: #f3efe7;
+  --accent: #c9a227;
+  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  min-height: 100%;
+  padding: 2rem;
+  text-align: center;
+}
+
+.wordmark {
+  margin: 0;
+  font-size: clamp(3rem, 18vw, 9rem);
+  font-weight: 400;
+  font-variation-settings: "opsz" 144;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.links a {
+  color: var(--accent);
+  font-size: 1.125rem;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 150ms ease;
+}
+
+.links a:hover,
+.links a:focus-visible {
+  border-bottom-color: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

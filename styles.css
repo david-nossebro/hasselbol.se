@@ -52,6 +52,10 @@ body {
   gap: 1.5rem;
 }
 
+.links[hidden] {
+  display: none;
+}
+
 .links a {
   color: var(--accent);
   font-size: 1.125rem;
